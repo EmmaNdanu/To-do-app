@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": "1fb0",
+      "name": "emma",
+      "email": "emmandanu087@gmail.com",
+      "password": "ndanuu2122"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1631",
+      "title": "eat",
+      "completed": false,
+      "userId": "1fb0"
+    },
+    {
+      "id": "0b6e",
+      "title": "sleep",
+      "completed": false,
+      "userId": "1fb0"
+    },
+    {
+      "id": "cd4c",
+      "title": "wash",
+      "completed": false,
+      "userId": "1fb0"
+    }
+  ]
+}
