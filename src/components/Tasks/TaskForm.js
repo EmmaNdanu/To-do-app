@@ -1,28 +1,44 @@
 // src/components/Tasks/TaskForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 
-const TaskForm = ({ onTaskAdded }) => {
+const TaskForm = ({ onTaskAdded, editingTask, onUpdate }) => {
   const [title, setTitle] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title);
+      setDueDate(editingTask.dueDate || '');
+    }
+  }, [editingTask]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
 
-    const newTask = {
+    const taskData = {
       title,
-      completed: false,
+      completed: editingTask?.completed || false,
+      dueDate,
       userId: currentUser.id
     };
 
     try {
-      const res = await axios.post('http://localhost:5001/tasks', newTask);
-      onTaskAdded(res.data);
+      if (editingTask) {
+        const res = await axios.put(`http://localhost:5000/tasks/${editingTask.id}`, taskData);
+        onUpdate(res.data);
+      } else {
+        const res = await axios.post('http://localhost:5000/tasks', taskData);
+        onTaskAdded(res.data);
+      }
+
       setTitle('');
+      setDueDate('');
     } catch (err) {
-      alert('Error adding task');
+      console.error('Error saving task');
     }
   };
 
@@ -34,7 +50,12 @@ const TaskForm = ({ onTaskAdded }) => {
         placeholder="Enter task"
         required
       />
-      <button type="submit">Add Task</button>
+      <input
+        type="date"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+      />
+      <button type="submit">{editingTask ? 'Update Task' : 'Add Task'}</button>
     </form>
   );
 };

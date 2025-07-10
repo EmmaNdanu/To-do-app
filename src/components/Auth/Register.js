@@ -13,17 +13,17 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`http://localhost:5001/users?email=${form.email}`);
+      const res = await axios.get(`http://localhost:5000/users?email=${form.email}`);
       if (res.data.length > 0) {
-        alert("User already exists");
+       console.log("User already exists");
         return;
       }
 
       await axios.post('http://localhost:5000/users', form);
-      alert('Registered successfully!');
+     console.log('Registered successfully!');
       navigate('/login');
     } catch (err) {
-      alert('Error registering user');
+     console.error('Error registering user');
     }
   };
 

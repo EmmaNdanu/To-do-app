@@ -5,6 +5,12 @@
       "name": "emma",
       "email": "emmandanu087@gmail.com",
       "password": "ndanuu2122"
+    },
+    {
+      "id": "c563",
+      "name": "ndanu",
+      "email": "ndanuwambua6@gmail.com",
+      "password": "333444555"
     }
   ],
   "tasks": [
@@ -25,6 +31,20 @@
       "title": "wash",
       "completed": false,
       "userId": "1fb0"
+    },
+    {
+      "title": "eatting",
+      "completed": true,
+      "dueDate": "2025-07-12",
+      "userId": "c563",
+      "id": "d164"
+    },
+    {
+      "id": "53f4",
+      "title": "read",
+      "completed": true,
+      "dueDate": "2025-07-11",
+      "userId": "c563"
     }
   ]
 }

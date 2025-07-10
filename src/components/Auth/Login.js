@@ -12,16 +12,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`http://localhost:5001/users?email=${form.email}&password=${form.password}`);
+      const res = await axios.get(`http://localhost:5000/users?email=${form.email}&password=${form.password}`);
       if (res.data.length > 0) {
         login(res.data[0]);
-        alert('Login successful!');
+        console.log('Login successful!');
         navigate('/dashboard');
       } else {
-        alert('Invalid credentials');
+       console.log('Invalid credentials');
       }
     } catch (err) {
-      alert('Login failed');
+      console.error('Login failed');
     }
   };
   return (

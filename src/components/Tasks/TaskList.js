@@ -8,16 +8,17 @@ import { useAuth } from '../../context/AuthContext';
 const TaskList = () => {
   const { currentUser } = useAuth();
   const [tasks, setTasks] = useState([]);
+  const [editingTask, setEditingTask] = useState(null);
 
   useEffect(() => {
     if (!currentUser) return;
 
     const fetchTasks = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001/tasks?userId=${currentUser.id}`);
+        const res = await axios.get(`http://localhost:5000/tasks?userId=${currentUser.id}`);
         setTasks(res.data);
       } catch (err) {
-        alert('Error fetching tasks');
+        console.error('Error fetching tasks');
       }
     };
 
@@ -32,13 +33,36 @@ const TaskList = () => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
+  const handleEdit = (task) => {
+    setEditingTask(task);
+  };
+
+  const handleUpdate = (updatedTask) => {
+    setTasks(tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
+    setEditingTask(null);
+  };
+
+  const handleComplete = (updatedTask) => {
+    setTasks(tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
+  };
+
   return (
     <div>
       <h3>Your Tasks</h3>
-      <TaskForm onTaskAdded={handleTaskAdded} />
+      <TaskForm
+        onTaskAdded={handleTaskAdded}
+        editingTask={editingTask}
+        onUpdate={handleUpdate}
+      />
       <ul>
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} onDelete={handleDelete} />
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            onComplete={handleComplete}
+          />
         ))}
       </ul>
     </div>
