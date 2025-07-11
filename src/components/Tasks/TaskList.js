@@ -1,4 +1,3 @@
-// src/components/Tasks/TaskList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TaskItem from './TaskItem';
@@ -47,24 +46,33 @@ const TaskList = () => {
   };
 
   return (
-    <div>
-      <h3>Your Tasks</h3>
+    <div className="bg-white rounded-xl shadow-xl p-6">
+      <h2 className="text-2xl font-bold text-slate-800 mb-4">🗂️ Your Tasks</h2>
+
       <TaskForm
         onTaskAdded={handleTaskAdded}
         editingTask={editingTask}
         onUpdate={handleUpdate}
       />
-      <ul>
-        {tasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-            onComplete={handleComplete}
-          />
-        ))}
-      </ul>
+
+      {/* Task Cards */}
+      <div className="mt-6">
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
+            <div key={task.id} className="mb-6">
+              <TaskItem
+                task={task}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+                onComplete={handleComplete}
+                onDuplicate={(newTask) => setTasks([...tasks, newTask])}
+              />
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-400 mt-4">No tasks yet.</p>
+        )}
+      </div>
     </div>
   );
 };
