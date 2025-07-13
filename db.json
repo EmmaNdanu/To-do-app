@@ -11,6 +11,12 @@
       "name": "ndanu",
       "email": "ndanuwambua6@gmail.com",
       "password": "333444555"
+    },
+    {
+      "id": "896e",
+      "name": "Deen",
+      "email": "deenramah4@gmail.com",
+      "password": "@Taliah66"
     }
   ],
   "tasks": [
@@ -45,6 +51,24 @@
       "completed": true,
       "dueDate": "2025-07-11",
       "userId": "c563"
+    },
+    {
+      "title": "Mkubwa",
+      "description": "To the next boom",
+      "dueDate": "2025-07-11T09:55",
+      "category": "Home",
+      "completed": false,
+      "userId": "896e",
+      "id": "6fc3"
+    },
+    {
+      "id": "dc14",
+      "title": "zdfghj",
+      "description": "ujhfy",
+      "dueDate": "2025-07-11T09:19",
+      "category": "Health/Fitness",
+      "completed": false,
+      "userId": "896e"
     }
   ]
 }
